@@ -17,6 +17,8 @@
 .app {
   @apply w-full min-h-screen flex flex-col;
 }
+
+/* =========================Login=========================== */
 .login-container {
   @apply bg-no-repeat bg-cover;
   background-image: url('/loginBg.svg');
