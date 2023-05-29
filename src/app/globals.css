@@ -10,8 +10,10 @@
       format('woff2');
 }
 * {
+  transition: all 250ms ease-in-out;
   font-family: Product Sans;
 }
+
 .app {
   @apply w-full min-h-screen flex flex-col;
 }
@@ -19,9 +21,35 @@
   @apply bg-no-repeat bg-cover;
   background-image: url('/loginBg.svg');
 }
+.text-input {
+  @apply bg-transparent border border-blue-500;
+}
+.text-input input {
+  @apply bg-transparent text-white;
+}
+.text-input input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.554);
+  opacity: 1; /* Firefox */
+}
+
+.text-input input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.554);
+}
+
+.text-input input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.554);
+}
 .login-main-container {
-  @apply w-full min-h-screen backdrop-blur-md flex justify-center items-center;
+  @apply w-full min-h-screen backdrop-blur-md flex flex-col justify-center items-center;
 }
 .login-form-container {
-  @apply w-1/4 rounded-xl p-6 shadow-md backdrop-blur-md bg-slate-800 bg-opacity-60;
+  @apply w-5/6 lg:w-1/4 rounded-2xl p-10 shadow-md backdrop-blur-md;
+  background-image: linear-gradient(
+    to top right,
+    rgba(17, 19, 21, 0.8),
+    rgba(46, 46, 56, 0.8)
+  );
 }
