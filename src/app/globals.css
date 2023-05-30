@@ -45,10 +45,13 @@
   color: rgba(255, 255, 255, 0.554);
 }
 .login-main-container {
-  @apply w-full min-h-full backdrop-blur-md flex flex-col justify-center items-center;
+  @apply w-full min-h-full backdrop-blur-md flex flex-col-reverse lg:flex-row justify-around items-center;
+}
+.intro-container {
+  @apply lg:w-2/5 w-5/6;
 }
 .login-form-container {
-  @apply w-5/6 lg:w-1/4 rounded-2xl p-10 shadow-md backdrop-blur-md;
+  @apply w-full rounded-2xl p-10 shadow-md backdrop-blur-md;
   background-image: linear-gradient(
     to top right,
     rgba(17, 19, 21, 0.8),

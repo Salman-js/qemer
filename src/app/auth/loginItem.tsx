@@ -19,7 +19,7 @@ const LoginItem: React.FC<loginItemProps> = ({ activeItem }) => {
     <Grow in={activeItem === 1} style={{ transformOrigin: '1 0 1' }}>
       <div className='login-form-container'>
         <p className='text-xl text-white'>Sign in</p>
-        <p className='text-sm text-gray-400 font-light mt-2'>
+        <p className='text-sm text-orange-400 font-light mt-2'>
           Login to manage your account
         </p>
         <div className='space-y-3 mt-4'>

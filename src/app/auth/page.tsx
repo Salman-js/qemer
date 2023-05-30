@@ -11,34 +11,46 @@ const Index: React.FC<indexProps> = () => {
   return (
     <div className='login-container'>
       <div className='login-main-container'>
-        {activeItem === 1 ? (
-          <LoginItem activeItem={activeItem} />
-        ) : (
-          <SignupItem activeItem={activeItem} />
-        )}
-        {activeItem === 1 ? (
-          <div className='pt-6 text-gray-400 text-sm'>
-            Don&apos;t have an account?{' '}
-            <Button
-              className='text-blue-500 border-0'
-              size='small'
-              onClick={() => setActiveItem(2)}
-            >
-              Sign up
-            </Button>
-          </div>
-        ) : (
-          <div className='pt-6 text-gray-400 text-sm'>
-            Already have an account?{' '}
-            <Button
-              className='text-blue-500 border-0'
-              onClick={() => setActiveItem(1)}
-              size='small'
-            >
-              Sign in
-            </Button>
-          </div>
-        )}
+        <div className='intro-container'>
+          <p className='text-4xl text-white font-semibold text-center'>
+            A New Way to Learn
+          </p>
+          <p className='text-lg text-gray-400 text-center mt-6'>
+            <span className='text-orange-400'>Qemer</span> is the best platform
+            to help you enhance your skills, expand your knowledge and prepare
+            for technical interviews.
+          </p>
+        </div>
+        <div className='lg:w-1/4 w-5/6'>
+          {activeItem === 1 ? (
+            <LoginItem activeItem={activeItem} />
+          ) : (
+            <SignupItem activeItem={activeItem} />
+          )}
+          {activeItem === 1 ? (
+            <div className='pt-6 text-gray-400 text-sm text-center mx-auto'>
+              Don&apos;t have an account?{' '}
+              <Button
+                className='text-blue-500 border-0'
+                size='small'
+                onClick={() => setActiveItem(2)}
+              >
+                Sign up
+              </Button>
+            </div>
+          ) : (
+            <div className='pt-6 text-gray-400 text-sm text-center mx-auto'>
+              Already have an account?{' '}
+              <Button
+                className='text-blue-500 border-0'
+                onClick={() => setActiveItem(1)}
+                size='small'
+              >
+                Sign in
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

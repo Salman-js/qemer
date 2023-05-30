@@ -19,7 +19,7 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
     <Grow in={activeItem === 2}>
       <div className='login-form-container'>
         <p className='text-xl text-white'>Sign up</p>
-        <p className='text-sm text-gray-400 font-light mt-2'>
+        <p className='text-sm text-orange-400 font-light mt-2'>
           Create your account
         </p>
         <div className='space-y-3 mt-4'>
@@ -40,13 +40,8 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
             }
             className='text-input'
           />
-          <div className='pb-3'>
-            <Link href='' className='text-blue-500 text-sm'>
-              forgot password?
-            </Link>
-          </div>
           <Button type='primary' className='bg-blue-500 w-full'>
-            Sign in
+            Create account
           </Button>
         </div>
       </div>
