@@ -3,6 +3,7 @@ import {
   EyeInvisibleOutlined,
   EyeOutlined,
   KeyOutlined,
+  MailOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Grow } from '@mui/material';
@@ -19,20 +20,25 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
     <Grow in={activeItem === 2}>
       <div className='login-form-container'>
         <p className='text-xl text-white'>Sign up</p>
-        <p className='text-sm text-orange-400 font-light mt-2'>
+        <p className='text-sm text-gray-400 font-light mt-2'>
           Create your account
         </p>
         <div className='space-y-3 mt-4'>
           <Input
-            placeholder='Email'
+            placeholder='Name'
             prefix={<UserOutlined style={{ color: 'white' }} />}
+            className='text-input'
+          />
+          <Input
+            placeholder='Email'
+            prefix={<MailOutlined style={{ color: 'white' }} />}
             className='text-input'
           />
           <Input.Password
             placeholder='Password'
             prefix={<KeyOutlined style={{ color: 'white' }} />}
             iconRender={(visible) =>
-              visible ? (
+              !visible ? (
                 <EyeOutlined style={{ color: 'white' }} />
               ) : (
                 <EyeInvisibleOutlined style={{ color: 'white' }} />

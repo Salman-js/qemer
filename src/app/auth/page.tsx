@@ -20,8 +20,14 @@ const Index: React.FC<indexProps> = () => {
             to help you enhance your skills, expand your knowledge and prepare
             for technical interviews.
           </p>
+          <Button
+            type='default'
+            className='rounded-full mx-auto bg-transparent mt-4 text-white'
+          >
+            Learn more
+          </Button>
         </div>
-        <div className='lg:w-1/4 w-5/6'>
+        <div className='lg:w-1/4 md:w-2/3 w-5/6'>
           {activeItem === 1 ? (
             <LoginItem activeItem={activeItem} />
           ) : (
