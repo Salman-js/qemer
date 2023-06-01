@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { persistStore, persistReducer } from 'redux-persist';
-import { masterSlice } from './slices/masterSlice';
+import { masterSlice } from './slices/masterSlice.ts';
 
 const createNoopStorage = () => {
   return {

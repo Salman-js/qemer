@@ -3,11 +3,17 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 import LoginItem from './loginItem';
 import SignupItem from './signupItem';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../../slices/masterSlice';
+import ForgotPasswordItem from './forgotPasswordItem';
+import toast, { Toaster } from 'react-hot-toast';
 
 type indexProps = {};
 
 const Index: React.FC<indexProps> = () => {
   const [activeItem, setActiveItem] = useState(1);
+  const auth = useSelector((state: IRootState) => state.auth);
+  console.log(auth);
   return (
     <div className='login-container'>
       <div className='login-main-container'>
@@ -29,9 +35,11 @@ const Index: React.FC<indexProps> = () => {
         </div>
         <div className='lg:w-1/4 md:w-2/3 w-5/6'>
           {activeItem === 1 ? (
-            <LoginItem activeItem={activeItem} />
-          ) : (
+            <LoginItem activeItem={activeItem} setActiveItem={setActiveItem} />
+          ) : activeItem === 2 ? (
             <SignupItem activeItem={activeItem} />
+          ) : (
+            <ForgotPasswordItem activeItem={activeItem} />
           )}
           {activeItem === 1 ? (
             <div className='pt-6 text-gray-400 text-sm text-center mx-auto'>

@@ -6,3 +6,5 @@ export const masterSlice = combineReducers({
   auth: authSlice,
   errors: errorSlice,
 });
+
+export type IRootState = ReturnType<typeof masterSlice>;
