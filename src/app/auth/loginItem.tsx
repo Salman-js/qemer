@@ -2,13 +2,20 @@
 import {
   EyeInvisibleOutlined,
   EyeOutlined,
+  InfoCircleOutlined,
   KeyOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Grow } from '@mui/material';
-import { Button, Input } from 'antd';
+import { Button as AntButton, Input, Tooltip, Divider } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { Button } from 'semantic-ui-react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '../../../firebase/firebase';
+import GoogleAuth from './googleAuth';
+import GithubAuth from './githubAuth';
+import TwitterAuth from './twitterAuth';
 
 type loginItemProps = {
   activeItem: number;
@@ -20,8 +27,19 @@ const LoginItem: React.FC<loginItemProps> = ({ activeItem, setActiveItem }) => {
     email: '',
     password: '',
   });
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      const newUser = await signInWithEmailAndPassword(
+        loginData.email,
+        loginData.password
+      );
+      if (!newUser) return;
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
   return (
     <Grow in={activeItem === 1} style={{ transformOrigin: '1 0 1' }}>
@@ -43,6 +61,22 @@ const LoginItem: React.FC<loginItemProps> = ({ activeItem, setActiveItem }) => {
                 });
               }}
               className='text-input'
+              status={
+                error?.code === 'auth/user-not-found' ||
+                error?.code === 'auth/invalid-email' ||
+                error?.code === 'auth/wrong-password'
+                  ? 'error'
+                  : ''
+              }
+              suffix={
+                (error?.code === 'auth/user-not-found' ||
+                  error?.code === 'auth/invalid-email' ||
+                  error?.code === 'auth/wrong-password') && (
+                  <Tooltip title={error?.code} trigger='click' defaultOpen>
+                    <InfoCircleOutlined style={{ color: 'red' }} />
+                  </Tooltip>
+                )
+              }
             />
             <Input.Password
               placeholder='Password'
@@ -64,22 +98,32 @@ const LoginItem: React.FC<loginItemProps> = ({ activeItem, setActiveItem }) => {
               }}
             />
             <div className='pb-3'>
-              <Button
+              <AntButton
                 type='link'
                 className='text-blue-500 text-sm'
                 size='small'
                 onClick={() => setActiveItem(3)}
               >
                 forgot password?
-              </Button>
+              </AntButton>
             </div>
             <Button
-              type='primary'
-              htmlType='submit'
-              className='bg-blue-500 w-full'
+              type='submit'
+              disabled={
+                !loginData.email.trim().length ||
+                !loginData.password.trim().length
+              }
+              loading={loading}
+              primary
+              className='w-full'
             >
               Sign in
             </Button>
+            <Divider style={{color: 'white'}}>Or</Divider>
+            <div className='w-full flex flex-row justify-center space-x-6 items-center'>
+              <GoogleAuth />
+              <GithubAuth />
+            </div>
           </div>
         </form>
       </div>

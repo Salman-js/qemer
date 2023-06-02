@@ -1,6 +1,7 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './globals.css';
+import 'semantic-ui-css/semantic.min.css';
 import { Provider } from 'react-redux';
 import { store } from '../../store';
 

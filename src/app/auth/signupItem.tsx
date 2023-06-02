@@ -1,13 +1,15 @@
 'use client';
 import {
+  AlertFilled,
   EyeInvisibleOutlined,
   EyeOutlined,
+  InfoCircleOutlined,
   KeyOutlined,
   MailOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Grow } from '@mui/material';
-import { Button, Input } from 'antd';
+import { Input, Tooltip, Divider } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -15,6 +17,10 @@ import { auth } from '../../../firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../slices/authSlice';
 import { useRouter } from 'next/navigation';
+import { Button } from 'semantic-ui-react';
+import GoogleAuth from './googleAuth';
+import GithubAuth from './githubAuth';
+import TwitterAuth from './twitterAuth';
 
 type loginItemProps = {
   activeItem: number;
@@ -30,6 +36,7 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
   });
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -39,7 +46,6 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
       );
       if (!newUser) return;
       dispatch(setUser(newUser.user));
-      router.push('/');
     } catch (error: any) {
       console.log(error.message);
     }
@@ -75,7 +81,21 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
                   email: e.target.value,
                 });
               }}
+              status={
+                error?.code === 'auth/email-already-in-use' ||
+                error?.code === 'auth/invalid-email'
+                  ? 'error'
+                  : ''
+              }
               className='text-input'
+              suffix={
+                (error?.code === 'auth/email-already-in-use' ||
+                  error?.code === 'auth/invalid-email') && (
+                  <Tooltip title={error?.code} trigger='click' defaultOpen>
+                    <InfoCircleOutlined style={{ color: 'red' }} />
+                  </Tooltip>
+                )
+              }
             />
             <Input.Password
               placeholder='Password'
@@ -95,20 +115,33 @@ const SignupItem: React.FC<loginItemProps> = ({ activeItem }) => {
                   password: e.target.value,
                 });
               }}
+              status={error?.code === 'auth/weak-password' ? 'error' : ''}
+              suffix={
+                error?.code === 'auth/weak-password' && (
+                  <Tooltip title={error?.code} trigger='click' defaultOpen>
+                    <InfoCircleOutlined style={{ color: 'red' }} />
+                  </Tooltip>
+                )
+              }
             />
             <Button
-              type='primary'
-              htmlType='submit'
-              className='bg-blue-500 w-full'
+              type='submit'
+              className='w-full'
               loading={loading}
               disabled={
                 !signupData.displayName.trim().length ||
                 !signupData.email.trim().length ||
                 signupData.password.trim().length <= 5
               }
+              primary
             >
               Create account
             </Button>
+            <Divider style={{ color: 'white' }}>Or</Divider>
+            <div className='w-full flex flex-row justify-center space-x-6 items-center'>
+              <GoogleAuth />
+              <GithubAuth />
+            </div>
           </div>
         </form>
       </div>

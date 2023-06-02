@@ -21,7 +21,7 @@ const Index: React.FC<indexProps> = () => {
           <p className='text-4xl text-white font-semibold text-center'>
             A New Way to Learn
           </p>
-          <p className='text-lg text-gray-400 text-center mt-6'>
+          <p className='text-lg text-gray-400 text-center mt-4'>
             <span className='text-orange-400'>Qemer</span> is the best platform
             to help you enhance your skills, expand your knowledge and prepare
             for technical interviews.
