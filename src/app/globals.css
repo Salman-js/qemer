@@ -53,8 +53,24 @@
     rgba(17, 19, 21, 0.8),
     rgba(46, 46, 56, 0.8)
   );
-}.ant-divider-horizontal.ant-divider-with-text-center::before,
-.ant-divider-horizontal.ant-divider-with-text-center::after
-{
-   border-top: 1px solid white;
+}
+.ant-divider-horizontal.ant-divider-with-text-center::before,
+.ant-divider-horizontal.ant-divider-with-text-center::after {
+  border-top: 1px solid white;
+}
+
+.main {
+  @apply w-full min-h-screen bg-slate-900 pt-20;
+}
+.MuiDataGrid-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+.MuiDataGrid-cell,
+.MuiDataGrid-cell .MuiDataGrid-value {
+  color: white;
+  text-align: center;
+  border: 0px;
 }

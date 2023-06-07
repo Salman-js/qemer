@@ -18,9 +18,11 @@ const NavBar: React.FC<navBarProps> = () => {
           <Image src={require('../favicon.ico')} alt='LOGO' className='w-8' />
         </div>
         <div className='ml-2'>
-          <span className='text-orange-400 text-xl my-auto inline-block'>
-            Qemer
-          </span>
+          <Link href='/'>
+            <span className='text-orange-400 text-xl my-auto inline-block'>
+              Qemer
+            </span>
+          </Link>
         </div>
       </div>
       {/* {user && <Button animated negative size='medium' className='my-auto'>
