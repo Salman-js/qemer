@@ -3,7 +3,6 @@ import { ArrowBack } from '@mui/icons-material';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
 import { auth } from '../../../firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -25,12 +24,6 @@ const NavBar: React.FC<navBarProps> = () => {
           </Link>
         </div>
       </div>
-      {/* {user && <Button animated negative size='medium' className='my-auto'>
-        <Button.Content visible>Logout</Button.Content>
-        <Button.Content hidden>
-          <Icon name='arrow right' />
-        </Button.Content>
-      </Button>} */}
     </nav>
   );
 };

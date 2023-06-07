@@ -5,8 +5,14 @@ import Link from 'next/link';
 import MainNav from './mainNav';
 import { problems } from './components/problems';
 import { Task } from '@mui/icons-material';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../firebase/firebase';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
+  const [user, loading, error] = useAuthState(auth);
+  const router = useRouter();
   const columns = [
     {
       field: 'status',
@@ -46,6 +52,11 @@ export default function Home() {
       ),
     },
   ];
+  useEffect(() => {
+    if (!user) {
+      router.push('/auth');
+    }
+  }, [user]);
   return (
     <main className='main'>
       <MainNav />

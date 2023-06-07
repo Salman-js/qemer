@@ -1,19 +1,27 @@
 'use client';
 import { Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginItem from './loginItem';
 import SignupItem from './signupItem';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../slices/masterSlice';
 import ForgotPasswordItem from './forgotPasswordItem';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../../firebase/firebase';
+import { useRouter } from 'next/navigation';
 
 type indexProps = {};
 
 const Index: React.FC<indexProps> = () => {
   const [activeItem, setActiveItem] = useState(1);
-  const auth = useSelector((state: IRootState) => state.auth);
-  console.log(auth);
+  const [user, loading, error] = useAuthState(auth);
+  const router = useRouter();
+  useEffect(() => {
+    if (user) {
+      router.push('/');
+    }
+  }, [user]);
   return (
     <div className='login-container'>
       <div className='login-main-container'>
